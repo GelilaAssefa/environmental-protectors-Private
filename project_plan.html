@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Tarun Viswanath, Caroline Sanfelippo, Gelila Assefa, Meet Patel">
+
+<title>Project Plan: Natural and Technological Disasters</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="project_plan_files/libs/clipboard/clipboard.min.js"></script>
+<script src="project_plan_files/libs/quarto-html/quarto.js"></script>
+<script src="project_plan_files/libs/quarto-html/popper.min.js"></script>
+<script src="project_plan_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="project_plan_files/libs/quarto-html/anchor.min.js"></script>
+<link href="project_plan_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="project_plan_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="project_plan_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="project_plan_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="project_plan_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Project Plan: Natural and Technological Disasters</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Tarun Viswanath, Caroline Sanfelippo, Gelila Assefa, Meet Patel </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Urbanization, population centers growing, and increasing industrialization have been linked to a rise in natural and technological disasters, with an unfortunate increase in impact (Shen, et., 2013). A single disaster can have lifelong effects on survivors and the land around it, and with the amount of disasters per year on the rise, it is important to collect, analyze, and use the data to predict where, when, and how often disasters will occur.</p>
+<p>Our Data is from the Emergency Events Database, or EM-DAT. There is data available from 1900 to 2024, with some limitations. Data before 2000 has a written warning that claims pre-2000 data is “particularly subject to reporting biases,” and therefore requires acknowledgement from the user in order to download. Data from the ongoing year also has a warning, because data validation only occurs at the beginning of the subsequent year. Therefore, we will exclude 2024 from our data pull. We are, however, interested in our Shiny app users being able to view trends over many years, so we will include the potentially biased data going back to 1900, and we will pass on the warning to our own app. There are 26,406 records available from 1900-2023, including both natural and technological disasters, from all available geographic locations. There are 46 variables, including Boolean, numeric, and character variables. There is a unique ID variable constructed using the year, the sequential number for that year, and a three-digit country identifier. We are interested in allowing our users to perform an exploratory analysis on variables such as “Number Injured,” “Number Homeless,” and “Reconstruction Costs (Adjusted).”</p>
+<section id="literature-review" class="level2">
+<h2 class="anchored" data-anchor-id="literature-review">Literature Review:</h2>
+<p>Mavrakis, A., Lykoudis, S., &amp; Salvati, L. (2023). Predicting the occurrence of natural and technological disasters in Greece through Verhulst, multinomial and exponential models. Safety Science, 166, 106246. https://doi.org/10.1016/j.ssci.2023.106246</p>
+<p>Looks at using multiple models to predict the occurrence of natural/technological disasters in Greece. Even though I’m unfamiliar with Verhulst models, we have studied exponential models and multinomial models a bit in previous courses. Looking at how all the models predict the natural/technological disasters that will happen or have already occurred, most models don’t have accurate predictions. The Verhulst method is the best at having disasters in years that have already passed, while it overshoots in its predictions. This problem may be because disasters have been increasing almost every year since 1900. Meanwhile, the multinomial and Verhulst logistic methods have very similar numbers to the actual number of natural disasters on a year-by-year basis but never really have the same numbers. The exponential method doesn’t do a great job compared to the other models. *If we’re attempting to predict future years’ natural disasters, it may be worth using the Verhulst methods and the multinomial method and comparing them to other models we’ve used in the past.</p>
+<p>Grazzini, F., Dorrington, J., Grams, C. M., Craig, G. C., Magnusson, L., &amp; Vitart, F. (2024). Improving forecasts of precipitation extremes over Northern and central Italy using machine learning. Quarterly Journal of the Royal Meteorological Society, 150(762), 3167–3181. https://doi.org/10.1002/qj.4755</p>
+<p>While this article doesn’t look at natural disasters, it uses machine learning to help predict intense precipitation events. Most of us have recently taken, or are currently taking, machine learning, so incorporating it into our shiny app could be helpful. The researchers in this experiment showed that their model could do medium-range forecasting, gained three more days of forecast skill in this range, and added interpretability. The model does a good job of showing how we can use previous data to try and predict weather events. While it doesn’t mean it’ll be 100% accurate and that forecasters should rely on the model for weather predictions, it provides better analysis and backup information to help them. We should also aim to use our Shiny app to assist people who may want to predict natural disasters in a specific country with close accuracy, including how the people there will be affected (number of deceased/injured and reconstruction costs).</p>
+<p>R Ginantra, N., Hanafiah, M., Wanto, A., Winanjaya, R., &amp; Okprana, H. (2021). Utilization of the batch training method for predicting natural disasters and their impacts. IOP Conference Series: Materials Science and Engineering, 1071(1), 12022. https://doi.org/10.1088/1757-899x/1071/1/012022</p>
+<p>Batch training/learning is also a primary principle in machine learning, where the model uses all its data at once while separating data into training and testing groups. The researchers compiled information about natural disasters in Indonesia from 2010-2019 to try and predict data for 2020. The variables fell under three groups – toll (deaths), house damage (unit), and facilities broken (unit). Using a specific method (the model 4-10-1), the researchers attained a 91% accuracy rate, which means that the SSE/MSE shows an accuracy of 91%. This method would be helpful to use for predicting some of our variables, such as the number of injured and reconstruction costs.</p>
+</section>
+<section id="group-responsibilities" class="level2">
+<h2 class="anchored" data-anchor-id="group-responsibilities">Group Responsibilities:</h2>
+<p>Download dataset, process the dataset, clone the shared repository, Create Shiny App, create separate branches to update locally, Create exploratory graphs and statistical models with variable selection (histograms or bar plots depending on the variable, scatter plots, boxplots, or jitter plots, corresponding t-test, linear modeling, etc.), include the model information and graphs on Shiny, customize user interface layout to improve user experience.</p>
+</section>
+<section id="schedule" class="level2">
+<h2 class="anchored" data-anchor-id="schedule">Schedule:</h2>
+<ul>
+<li><p>Gather Data - (10/15) ✓</p></li>
+<li><p>Data Preparation - (10/31)</p></li>
+<li><p>Developing a basis of the Shiny app/finalizing our question of research - (11/1)</p></li>
+<li><p>Including basic statistical modeling/analysis in our code - (11/7)</p></li>
+<li><p>Finishing a basis of the Shiny app (includes graphs, statistical modeling, t/f-testing, and some data table output) – (11/11)</p></li>
+<li><p>Cleaning up code/R Shiny App – (11/14)</p></li>
+<li><p>Finishing answering our question/coding cutoff (11/21)</p></li>
+<li><p>R Shiny App fully functional/completed (11/25)</p></li>
+<li><p>Vignette Completed (11/28)</p></li>
+<li><p>Presentation Notes (12/7)</p></li>
+</ul>
+<p>We plan to employ the “Shared Repository” workflow to interact with our shared repository. We are a small team, and everyone will have write privileges to the main branch. To avoid merge conflicts, we will each take ownership over one tab on our Shiny app.</p>
+<p>According to the International Association of Business Analytics Certification (IABAC), there are many ethics for using data sources online, including privacy and data protection, fairness and bias, transparency and accountability, and consent and informed decision-making. These considerations must be consistent throughout the Data Science lifecycle, including during data collection, data preprocessing, and cleaning, model development and training, and model deployment and monitoring. As we are taking data from a public resource (as long as you make an account and are using the data for educational/research purposes), we can use the data freely because it does not contain personal identifiable information, rather it contains summary data of disasters. However, the data does need to be protected, as we cannot share it via the internet with unauthorized users or make commercial use of the EM-DAT (without specific permission and a fee). For fairness and bias, we want to ensure that we cannot discriminate against other groups of people. This is why EM-DAT tells us not to create substitute or derivative databases of their data, so we cannot incorporate biases into the data while claiming to be sourcing data from EM-DAT. The transparency and accountability of our data come from making sure that we mention how we altered/cleaned the data (if we did), where our data came from (EM-DAT), why we used specific models, and what they show (we should have accurate interpretation, not reaches in the data), and factual interpretations of the graphs as well. Lastly, we don’t specifically need informed consent since we can use data somewhat freely (with the guidelines previously mentioned). As long as we create an account that mentions we’re using the data for educational purposes (which we are), we don’t need informed consent (only need it if we’re using it for commercial use).</p>
+<p>A user of our app would be interested in answering questions such as “is there a relationship between the number of injuries from a disaster and the adjusted cost?” and “has deaths from disasters increased over time?” To answer these questions, a user will begin to explore the dataset using histograms and bar plots. Next, they will check for correlations between variables using scatter plots and t-tests. Box plots and jitter plots will also be available for this analysis. Then, the user will question if any changes have occurred over time and will be able to visualize that in a time series plot. Lastly, they will explore the global impact by comparing variables across different countries using an interactive map.</p>
+<p>We will create separate tabs to allow the user to focus on different objectives such as exploration of the data, variable analysis, disasters over time, and an interactive map. To get a sense of the data in the exploration tab, the user will first have the opportunity to select numeric variables (number affected, costs, etc.) to appear in a histogram. There will also be a bar plot for the exploration of variables like disaster type grouped by region. Below the plot will be a t-test summary of the mean of the true population to enhance the understanding of the spread of the data. Next, for variable comparison, the user will be able to compare numeric variables in a scatterplot with a linear smoother. If they wish to compare a categorical variable to a numeric variable, a boxplot will be generated. Comparing two categorical variables will generate a jitter plot. This tab will also hold the linear model for the associated scatter plot. For the disasters over time tab, we will need to pre-process the data. There are six variables that must be condensed into two: start year, start month, start day, end year, end month, and end day will be parsed into a start date and end date. These variables will be used in a time series plot where the user can explore natural vs technological disasters over time, the type of disaster over time, the number of injuries per disaster over time, whatever variable they select. They will also be able to select a specific time frame, perhaps conceding to the data warning about pre-2000 data. The last tab will use the packages {maps} and {ggplot2} to take the latitudes and longitudes provided and translate them to an interactive map. The user will be able to select a numeric variable (such as number of injuries or total count from 1900-2023), and the map will color every country with available data based on the variable selected.</p>
+<p>To ensure a user-friendly experience, we plan to include brief guidance and tooltips within each tab of the app. These tips will provide context for interpreting the visualizations and analyses, especially for users who may be unfamiliar with certain statistical methods, such as t-tests or correlation analyses. For example, scatter plots will include a short description of how to assess variable relationships, and t-test outputs will explain statistical significance in straightforward terms. This added guidance aims to help users draw meaningful conclusions from the data without requiring extensive prior knowledge, making the app accessible to a broader audience.</p>
+</section>
+<section id="additional-references" class="level2">
+<h2 class="anchored" data-anchor-id="additional-references">Additional References</h2>
+<p>“EM-DAT, CRED / UCLouvain, Brussels, Belgium – www.emdat.be”</p>
+<p>IABAC®. (2023, September 14). Ethical considerations in Data Science. IABAC®. https://iabac.org/blog/ethical-considerations-in-data-science</p>
+<p>Guoqiang Shen, Long Zhou, Xianwu Xue, Yu Zhou, The risk impacts of global natural and technological disasters, Socio-Economic Planning Sciences, Volume 88, 2023, 101653, ISSN 0038-0121, https://doi.org/10.1016/j.seps.2023.101653 (https://www.sciencedirect.com/science/article/pii/S0038012123001659)</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

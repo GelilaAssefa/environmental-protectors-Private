@@ -1,0 +1,82 @@
+---
+title: "Project Plan: Natural and Technological Disasters"
+author: "Tarun Viswanath, Caroline Sanfelippo, Gelila Assefa, Meet Patel"
+format: html
+editor: visual
+---
+
+
+Urbanization, population centers growing, and increasing industrialization have been linked to a rise in natural and technological disasters, with an unfortunate increase in impact (Shen, et., 2013). A single disaster can have lifelong effects on survivors and the land around it, and with the amount of disasters per year on the rise, it is important to collect, analyze, and use the data to predict where, when, and how often disasters will occur.
+
+
+Our Data is from the Emergency Events Database, or EM-DAT. There is data available from 1900 to 2024, with some limitations. Data before 2000 has a written warning that claims pre-2000 data is “particularly subject to reporting biases,” and therefore requires acknowledgement from the user in order to download. Data from the ongoing year also has a warning, because data validation only occurs at the beginning of the subsequent year. Therefore, we will exclude 2024 from our data pull. We are, however, interested in our Shiny app users being able to view trends over many years, so we will include the potentially biased data going back to 1900, and we will pass on the warning to our own app. There are 26,406 records available from 1900-2023, including both natural and technological disasters, from all available geographic locations. There are 46 variables, including Boolean, numeric, and character variables. There is a unique ID variable constructed using the year, the sequential number for that year, and a three-digit country identifier. We are interested in allowing our users to perform an exploratory analysis on variables such as “Number Injured,” “Number Homeless,” and “Reconstruction Costs (Adjusted).”  
+
+
+## Literature Review:
+
+Mavrakis, A., Lykoudis, S., & Salvati, L. (2023). Predicting the occurrence of natural and technological disasters in Greece through Verhulst, multinomial and exponential models. Safety Science, 166, 106246. https://doi.org/10.1016/j.ssci.2023.106246  
+
+Looks at using multiple models to predict the occurrence of natural/technological disasters in Greece. Even though I’m unfamiliar with Verhulst models, we have studied exponential models and multinomial models a bit in previous courses. Looking at how all the models predict the natural/technological disasters that will happen or have already occurred, most models don't have accurate predictions. The Verhulst method is the best at having disasters in years that have already passed, while it overshoots in its predictions. This problem may be because disasters have been increasing almost every year since 1900. Meanwhile, the multinomial and Verhulst logistic methods have very similar numbers to the actual number of natural disasters on a year-by-year basis but never really have the same numbers. The exponential method doesn’t do a great job compared to the other models. *If we’re attempting to predict future years’ natural disasters, it may be worth using the Verhulst methods and the multinomial method and comparing them to other models we’ve used in the past. 
+
+Grazzini, F., Dorrington, J., Grams, C. M., Craig, G. C., Magnusson, L., & Vitart, F. (2024). Improving forecasts of precipitation extremes over Northern and central Italy using machine learning. Quarterly Journal of the Royal Meteorological Society, 150(762), 3167–3181. https://doi.org/10.1002/qj.4755  
+
+While this article doesn’t look at natural disasters, it uses machine learning to help predict intense precipitation events. Most of us have recently taken, or are currently taking, machine learning, so incorporating it into our shiny app could be helpful. The researchers in this experiment showed that their model could do medium-range forecasting, gained three more days of forecast skill in this range, and added interpretability. The model does a good job of showing how we can use previous data to try and predict weather events. While it doesn’t mean it’ll be 100% accurate and that forecasters should rely on the model for weather predictions, it provides better analysis and backup information to help them. We should also aim to use our Shiny app to assist people who may want to predict natural disasters in a specific country with close accuracy, including how the people there will be affected (number of deceased/injured and reconstruction costs). 
+
+R Ginantra, N., Hanafiah, M., Wanto, A., Winanjaya, R., & Okprana, H. (2021). Utilization of the batch training method for predicting natural disasters and their impacts. IOP Conference Series: Materials Science and Engineering, 1071(1), 12022. https://doi.org/10.1088/1757-899x/1071/1/012022  
+
+Batch training/learning is also a primary principle in machine learning, where the model uses all its data at once while separating data into training and testing groups. The researchers compiled information about natural disasters in Indonesia from 2010-2019 to try and predict data for 2020. The variables fell under three groups – toll (deaths), house damage (unit), and facilities broken (unit). Using a specific method (the model 4-10-1), the researchers attained a 91% accuracy rate, which means that the SSE/MSE shows an accuracy of 91%. This method would be helpful to use for predicting some of our variables, such as the number of injured and reconstruction costs. 
+
+ 
+## Group Responsibilities: 
+
+Download dataset, process the dataset, clone the shared repository, Create Shiny App, create separate branches to update locally, Create exploratory graphs and statistical models with variable selection (histograms or bar plots depending on the variable, scatter plots, boxplots, or jitter plots, corresponding t-test, linear modeling, etc.), include the model information and graphs on Shiny, customize user interface layout to improve user experience. 
+
+ 
+
+## Schedule: 
+
+- Gather Data - (10/15) ✓ 
+
+- Data Preparation - (10/31) 
+
+- Developing a basis of the Shiny app/finalizing our question of research - (11/1) 
+
+- Including basic statistical modeling/analysis in our code - (11/7) 
+
+- Finishing a basis of the Shiny app (includes graphs, statistical modeling, t/f-testing, and some data table output) – (11/11) 
+
+- Cleaning up code/R Shiny App – (11/14) 
+
+- Finishing answering our question/coding cutoff (11/21) 
+
+- R Shiny App fully functional/completed (11/25) 
+
+- Vignette Completed (11/28) 
+
+- Presentation Notes (12/7) 
+
+ 
+
+We plan to employ the “Shared Repository” workflow to interact with our shared repository. We are a small team, and everyone will have write privileges to the main branch. To avoid merge conflicts, we will each take ownership over one tab on our Shiny app. 
+
+According to the International Association of Business Analytics Certification (IABAC), there are many ethics for using data sources online, including privacy and data protection, fairness and bias, transparency and accountability, and consent and informed decision-making. These considerations must be consistent throughout the Data Science lifecycle, including during data collection, data preprocessing, and cleaning, model development and training, and model deployment and monitoring. As we are taking data from a public resource (as long as you make an account and are using the data for educational/research purposes), we can use the data freely because it does not contain personal identifiable information, rather it contains summary data of disasters. However, the data does need to be protected, as we cannot share it via the internet with unauthorized users or make commercial use of the EM-DAT (without specific permission and a fee). For fairness and bias, we want to ensure that we cannot discriminate against other groups of people. This is why EM-DAT tells us not to create substitute or derivative databases of their data, so we cannot incorporate biases into the data while claiming to be sourcing data from EM-DAT. The transparency and accountability of our data come from making sure that we mention how we altered/cleaned the data (if we did), where our data came from (EM-DAT), why we used specific models, and what they show (we should have accurate interpretation, not reaches in the data), and factual interpretations of the graphs as well. Lastly, we don’t specifically need informed consent since we can use data somewhat freely (with the guidelines previously mentioned). As long as we create an account that mentions we’re using the data for educational purposes (which we are), we don’t need informed consent (only need it if we’re using it for commercial use). 
+
+A user of our app would be interested in answering questions such as “is there a relationship between the number of injuries from a disaster and the adjusted cost?” and “has deaths from disasters increased over time?” To answer these questions, a user will begin to explore the dataset using histograms and bar plots. Next, they will check for correlations between variables using scatter plots and t-tests. Box plots and jitter plots will also be available for this analysis. Then, the user will question if any changes have occurred over time and will be able to visualize that in a time series plot. Lastly, they will explore the global impact by comparing variables across different countries using an interactive map.  
+
+We will create separate tabs to allow the user to focus on different objectives such as exploration of the data, variable analysis, disasters over time, and an interactive map. To get a sense of the data in the exploration tab, the user will first have the opportunity to select numeric variables (number affected, costs, etc.) to appear in a histogram. There will also be a bar plot for the exploration of variables like disaster type grouped by region. Below the plot will be a t-test summary of the mean of the true population to enhance the understanding of the spread of the data. Next, for variable comparison, the user will be able to compare numeric variables in a scatterplot with a linear smoother. If they wish to compare a categorical variable to a numeric variable, a boxplot will be generated. Comparing two categorical variables will generate a jitter plot. This tab will also hold the linear model for the associated scatter plot. For the disasters over time tab, we will need to pre-process the data. There are six variables that must be condensed into two: start year, start month, start day, end year, end month, and end day will be parsed into a start date and end date. These variables will be used in a time series plot where the user can explore natural vs technological disasters over time, the type of disaster over time, the number of injuries per disaster over time, whatever variable they select. They will also be able to select a specific time frame, perhaps conceding to the data warning about pre-2000 data. The last tab will use the packages {maps} and {ggplot2} to take the latitudes and longitudes provided and translate them to an interactive map. The user will be able to select a numeric variable (such as number of injuries or total count from 1900-2023), and the map will color every country with available data based on the variable selected.  
+
+To ensure a user-friendly experience, we plan to include brief guidance and tooltips within each tab of the app. These tips will provide context for interpreting the visualizations and analyses, especially for users who may be unfamiliar with certain statistical methods, such as t-tests or correlation analyses. For example, scatter plots will include a short description of how to assess variable relationships, and t-test outputs will explain statistical significance in straightforward terms. This added guidance aims to help users draw meaningful conclusions from the data without requiring extensive prior knowledge, making the app accessible to a broader audience. 
+
+ 
+
+ 
+
+ 
+
+## Additional References 
+
+“EM-DAT, CRED / UCLouvain, Brussels, Belgium – www.emdat.be” 
+
+IABAC®. (2023, September 14). Ethical considerations in Data Science. IABAC®. https://iabac.org/blog/ethical-considerations-in-data-science 
+
+Guoqiang Shen, Long Zhou, Xianwu Xue, Yu Zhou, The risk impacts of global natural and technological disasters, Socio-Economic Planning Sciences, Volume 88, 2023, 101653, ISSN 0038-0121, https://doi.org/10.1016/j.seps.2023.101653 (https://www.sciencedirect.com/science/article/pii/S0038012123001659) 

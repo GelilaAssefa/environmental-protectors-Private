@@ -1,0 +1,110 @@
+---
+title: "Global Disaster Analysis Dashboard Vignette"
+Author: "Tarun Viswanath, Caroline Safelippo, Meet Patel, Gelila Assefa"
+Date: "12/12/2024"
+format: html
+editor: visual
+---
+
+1.  Use Case
+
+Our R Shiny App visualizes and analyzes natural and technological disasters worldwide. We provide interactive visualization of disaster impacts and enable comparative analysis across regions and time periods. Our app simplifies getting plenty of disaster-related information in one R Shiny App.
+
+Our App is helpful for individuals studying natural/technology disasters, including students and professionals alike. It provides helpful information and visualization without being too complex. Our app is specifically designed for informational usage.
+
+2.  Required Packages
+
+-   read_xl: used to help read in our Excel data set
+-   dplyr: used to manipulate data, especially for plotting efficiently
+-   janitor: cleaned variable names in the data set
+-   DT: essential for creating the R Shiny App
+-   shiny: also essential for creating the R Shiny App
+-   ggplot2: used for plotting in the R Shiny App
+-   scales: used for commas
+-   countries: helped create countries on the map plot
+-   plotly: used for the plotlyOutput() and renderPlotly() functions to help render functions within R Shiny
+-   bslib: used to create a theme for the R Shiny App
+
+3.  Default Data Source
+
+Our data source originated from EM-DAT, the international disaster database. We could use their data as long as we signed up as a student. We cleaned the data to remove values before the year 2000, as much of it is inaccurate and contains missing data.
+
+There are 15632 observations between 2000 and 2023.
+
+We removed the disaster number, location (specific town/city), month, start date, end date, and reconstruction costs (due to it having too many missing values) from our plotting/analysis.
+
+We used Disaster Group/Subgroup, Disaster Type/Subtype, Country, Subregion, Region, Magnitude, total deaths, number injured, number affected, number homeless, total damage (USD), and total affected (aggregate of number injured, number affected, and number homeless).
+
+4.  EDA
+
+Univariate Analysis Tab: Explores information of a single factor variable by the year(s) (ex. number of technological and natural) by using a bar plot
+
+Ex. Selecting the disaster group variable between 2022-23 shows the amount of natural and technological disasters in the dataset between 2022-23. Around 315 technological disasters and 765 natural disasters.
+
+It also visualizes magnitude by using a histogram. Can use the number of bins slider to change how the data is presented.
+
+Ex. Selecting the years 2022-23 shows that the vast majority of disasters had magnitudes less than 100.
+
+Time Series Analysis Tab: Explores the impact of disasters over 2000-2023: total deaths, total affected, and total damage (USD). It also looks at how the total numbers have changed over time. Individuals can select between the three (or all) to display.
+
+Ex. Only selecting the Total Affected metric (aggregate of number injured, number affected, and number homeless) shows that 2002-03 showed a peak high of around 280 million people affected by natural disasters
+
+Geographic Analysis Tab: Visualizes where in the world how badly various impact metrics (total deaths, number injured, number affected, number homeless, total damage (USD), and total affected) affect countries. Can sort by technology, natural, or both disasters.
+
+Ex. Exploring the number of homeless while selecting natural and technological disasters shows the US has had \>= 70,000 homeless individuals from natural disasters between 2000-2023. Meanwhile, Canada has had \>= 2000.
+
+5.  
+
+Univariate Tab: Looks at impact metrics by using a t-test. Select one impact metric variable (total deaths, number injured, number affected, number homeless, total damage (USD), and total affected). Includes basic information about the variable:
+
+-   Total: the total overall for the year(s) selected
+-   T-Test Estimate: The estimated average value for each country.
+-   Median: The middle number in the data.
+-   Standard Deviation: Tells us how varied the numbers are from the mean. It is the square root of the variance.
+-   95% CI: the confidence interval for which we are 95% sure the true mean lies between the two values.
+-   P-value: helps conclude if we reject or fail to reject the null hypothesis. If the p-value is below .05 (the alpha level), we would deem it significant, rejecting the null hypothesis that the true mean is greater than 0.
+
+Ex. Selecting total damage (USD) between 2022-23
+
+-   Total: \$391,285,314 USD in damages
+-   T-Test Estimate: average of \$2,126,552 USD in damages per country
+-   Median: 220,000
+-   Standard Deviation: 8,207,519
+-   95% Confidence Interval: We are 95% sure that the true mean value of damages per country lies between \[932,748 and 3,320,354\] dollars USD
+-   P-Value: 0.001 \< 0.05, so we can reject the null hypothesis that the true mean is \$0 per country in damages.
+
+Multiple Linear Regression Tab: MLR analysis of the impact metric variables in the model. Shows the model summary with key model statistics (R-squared, Adjusted R-squared, F-stat, p-value, and number of observations). Can select a Year Range (2000-2023), choose a dependent variable, and independent variable(s). Can also choose to remove NA values and/or scale the data.
+
+Ex. Selecting Total Damage (USD) as the dependent variable, Total Deaths as a numeric independent variable, and Disaster Type as a categorical variable for the years 2022-2023 shows:
+
+-   The model formula: total_damage_us \~ total_deaths + disaster_type
+
+-   The model has an R-squared value of 0.586 and adjusted R-squared of 0.563, indicating that approximately 58.6% of the variance in total damage can be explained by the model
+
+-   The F-statistic of 15.65 with a very low p-value (9.9e-11) suggests the model is statistically significant
+
+-   Total Deaths has a positive coefficient (0.3801), indicating that higher death counts are associated with greater monetary damage
+
+-   Different disaster types show varying effects on total damage, with:
+
+    -   Earthquakes showing significant negative association (-2.5252)
+
+    -   Extreme temperature events showing significant negative association (-2.2150)
+
+    -   Storm events showing significant negative association (-2.3674)
+
+    -   Wildfire events showing significant negative association (-2.6019)
+
+-   The diagnostic plots show:
+
+    1.  The Actual vs Predicted Values plot reveals a positive linear relationship between predicted and actual values, though with some scatter
+
+    2.  The Residuals vs Fitted Values plot shows relatively random scatter around zero, suggesting the linear model's assumptions are reasonably met
+
+6.  
+
+Shen, G., & Hwang, S. N. (2016). Revealing global hot spots of technological disasters: 1900–2013. Journal of Risk Research, 21(3), 361–393. https://doi.org/10.1080/13669877.2016.1179214
+
+Mavrakis, A., Lykoudis, S., & Salvati, L. (2023). Predicting the occurrence of natural and technological disasters in Greece through Verhulst, multinomial and exponential models. Safety Science, 166, 106246. https://doi.org/10.1016/j.ssci.2023.106246
+
+D. Tin, L. Cheng, D. Le, R. Hata, G. Ciottone, Natural disasters: a comprehensive study using EMDAT database 1995–2022, Public Health, Volume 226, 2024, Pages 255-260, ISSN 0033-3506, https://doi.org/10.1016/j.puhe.2023.11.017
